@@ -7,18 +7,18 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class EntryCreationTests : TestBase
+    public class ContactCreationTests : TestBase
     {
  
         [Test]
-        public void EntryCreationTest()
+        public void ContactCreationTest()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
 
-            AddNewEntry();
+            app.Contacts.AddNewEntry();
 
-            EntryData entry = new EntryData("Иван", "Иванов");
+            ContactData contact = new ContactData("Иван", "Иванов");
             /*
             entry.Home = "+7(921)999-99-00";
             entry.Address2 = "Санкт-Петербург";
@@ -42,9 +42,9 @@ namespace WebAddressbookTests
             entry.Nickname = "iii";
             */
 
-            FillEntry(entry);
-            SubmitCreation();
-            LogOut();
+            app.Contacts.FillEntry(contact);
+            app.Groups.SubmitCreation();
+            app.Auth.LogOut();
         }
 
      }

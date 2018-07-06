@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-    public class EntryData
+    public class ContactData
     {
 
         private string firstname;
@@ -37,7 +37,7 @@ namespace WebAddressbookTests
         private string notes = "";
 
 
-        public EntryData(string firstname="",  string lastname="")
+        public ContactData(string firstname="",  string lastname="")
         {
             this.firstname = firstname;
             this.lastname = lastname;
