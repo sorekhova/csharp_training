@@ -14,10 +14,5 @@ namespace WebAddressbookTests
             driver = manager.Driver;
         }
 
-        public void SubmitCreation()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-        //    return this;
-        }
-    }
+     }
 }

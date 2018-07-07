@@ -37,17 +37,8 @@ namespace WebAddressbookTests
             contactHelper = new ContactHelper(this);
         }
 
-        public IWebDriver Driver
-        {
-            get
-            {
-                return driver;
-            }
-                
-         }
-    
-
-    public void Stop()
+ 
+        public void Stop()
         {
             try
             {
@@ -57,6 +48,15 @@ namespace WebAddressbookTests
             {
                 // Ignore errors if unable to close the browser
             }
+        }
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
+
         }
 
         public LoginHelper Auth

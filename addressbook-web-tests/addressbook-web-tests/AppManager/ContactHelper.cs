@@ -20,10 +20,10 @@ namespace WebAddressbookTests
         {
             AddNewContact();
             FillEntry(contact);
-            SubmitCreation();
+            SubmitContactCreation();
             return this;
         }
-        public void FillEntry(ContactData contact)
+        public ContactHelper FillEntry(ContactData contact)
         {
 
             driver.FindElement(By.Name("firstname")).Clear();
@@ -98,12 +98,19 @@ namespace WebAddressbookTests
 
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
-
+            return this;
         }
 
-        public void AddNewContact()
+        public ContactHelper AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
     }
 }
