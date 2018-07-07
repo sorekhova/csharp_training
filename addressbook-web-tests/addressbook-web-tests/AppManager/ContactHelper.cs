@@ -109,7 +109,11 @@ namespace WebAddressbookTests
 
         public ContactHelper SubmitContactCreation()
         {
-            driver.FindElement(By.Name("submit")).Click();
+            if(IsElementPresent(By.Name("submit")))
+            {
+                driver.FindElement(By.Name("submit")).Click();
+            } 
+        
             return this;
         }
     }
