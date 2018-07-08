@@ -19,8 +19,17 @@ namespace WebAddressbookTests.tests
             newData.Footer = "qqq";
 
             app.Groups.Modify(1, newData);
+        }
 
-            //           app.Auth.LogOut();
+        [Test]
+        public void GroupModificationTestBottom()
+        {
+
+            GroupData newData = new GroupData("www");
+            newData.Header = "www";
+            newData.Footer = "www";
+
+            app.Groups.Modify(1, newData, 2);
         }
     }
 }

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Threading;
 
 namespace WebAddressbookTests
 {
@@ -16,14 +18,133 @@ namespace WebAddressbookTests
         {
         }
 
-        public ContactHelper Create(ContactData contact)
+        public ContactHelper Create(ContactData contact, int buttonIndex = 1)
         {
+            manager.Navigator.GoToHome();
+
             AddNewContact();
             FillEntry(contact);
-            SubmitContactCreation();
+            SubmitContactCreation(buttonIndex);
             return this;
         }
-        public ContactHelper FillEntry(ContactData contact)
+
+        public ContactHelper Remove(int index)
+        {
+            manager.Navigator.GoToHome();
+
+            SelectContact(index);
+            RemoveContact();
+            Thread.Sleep(1000);
+            AcceptAlert();
+            return this;
+        }
+
+        public ContactHelper ModifyViaDetails(int index, ContactData contact, int buttonIndex=1)
+        {
+            manager.Navigator.GoToHome();
+
+            DetailsContact(index);
+            ModifyContact();
+            FillEntry(contact, false);
+            UpdateContact(buttonIndex);
+            return this;
+        }
+
+        public ContactHelper ModifyViaEdit(int index, ContactData contact, int buttonIndex=1)
+        {
+            manager.Navigator.GoToHome();
+
+            EditContact(index);
+            FillEntry(contact, false);
+            UpdateContact(buttonIndex);
+            return this;
+        }
+
+        public ContactHelper RemoveViaDetails(int index)
+        {
+            manager.Navigator.GoToHome();
+
+            DetailsContact(index);
+            ModifyContact();
+            DeleteContact();
+            return this;
+        }
+
+        public ContactHelper RemoveViaEdit(int index)
+        {
+            manager.Navigator.GoToHome();
+
+            EditContact(index);
+            DeleteContact();
+            return this;
+        }
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+
+        public ContactHelper DetailsContact(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Details'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper ModifyContact()
+        {
+            driver.FindElement(By.Name("modifiy")).Click();
+            return this;
+        }
+
+        public ContactHelper EditContact(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index +"]")).Click();
+            return this;
+        }
+
+        public ContactHelper UpdateContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper DeleteContact()
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[3]")).Click();
+            return this;
+        }
+ 
+        public ContactHelper AddNewContact()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+
+        public ContactHelper AddNextContact()
+        {
+            driver.FindElement(By.LinkText("add next")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactCreation(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='submit'])[" + index + "]")).Click();
+            /*
+                        if (IsElementPresent(By.Name("submit")))
+                        {
+                            driver.FindElement(By.Name("submit")).Click();
+                        } 
+            */
+            return this;
+        }
+
+        public ContactHelper FillEntry(ContactData contact, bool create = true)
         {
 
             driver.FindElement(By.Name("firstname")).Clear();
@@ -74,7 +195,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(contact.Homepage);
 
-            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
+            if (create) { new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday); };
 
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
 
@@ -88,7 +209,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys(contact.Ayear);
 
-            new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(contact.New_group);
+            if (create) { new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(contact.New_group); };
 
             driver.FindElement(By.Name("address2")).Clear();
             driver.FindElement(By.Name("address2")).SendKeys(contact.Address2);
@@ -101,20 +222,11 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper AddNewContact()
+         public void AcceptAlert()
         {
-            driver.FindElement(By.LinkText("add new")).Click();
-            return this;
+            driver.SwitchTo().Alert().Accept();
         }
 
-        public ContactHelper SubmitContactCreation()
-        {
-            if(IsElementPresent(By.Name("submit")))
-            {
-                driver.FindElement(By.Name("submit")).Click();
-            } 
-        
-            return this;
-        }
+ 
     }
 }

@@ -18,11 +18,20 @@ namespace WebAddressbookTests
             GroupData group = new GroupData("aaa");
             group.Header = "ddd";
             group.Footer = "fff";
-
+            
             app.Groups.Create(group);
- //           app.Auth.LogOut();
         }
 
+        [Test]
+        public void GroupCreationTestBottom()
+        {
+
+            GroupData group = new GroupData("sss");
+            group.Header = "sss";
+            group.Footer = "sss";
+            
+            app.Groups.Create(group, 2);
+        }
         [Test]
         public void EmptyGroupCreationTest()
         {
@@ -31,8 +40,7 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
       
-            app.Groups.Create(group);
- //           app.Auth.LogOut();
+            app.Groups.Create(group, 1);
         }
 
     }

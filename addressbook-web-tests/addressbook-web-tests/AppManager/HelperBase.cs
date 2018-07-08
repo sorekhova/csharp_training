@@ -8,6 +8,7 @@ namespace WebAddressbookTests
     {
         protected IWebDriver driver;
         protected ApplicationManager manager;
+        private bool acceptNextAlert = true;
         public HelperBase(ApplicationManager manager)
         {
             this.manager = manager;
@@ -24,6 +25,41 @@ namespace WebAddressbookTests
             catch (NoSuchElementException)
             {
                 return false;
+            }
+        }
+
+        public bool IsAlertPresent()
+        {
+            try
+            {
+                driver.SwitchTo().Alert();
+                return true;
+            }
+            catch (NoAlertPresentException)
+            {
+                return false;
+            }
+        }
+
+        public string CloseAlertAndGetItsText()
+        {
+            try
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                string alertText = alert.Text;
+                if (acceptNextAlert)
+                {
+                    alert.Accept();
+                }
+                else
+                {
+                    alert.Dismiss();
+                }
+                return alertText;
+            }
+            finally
+            {
+                acceptNextAlert = true;
             }
         }
 

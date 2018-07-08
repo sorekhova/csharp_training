@@ -40,9 +40,28 @@ namespace WebAddressbookTests
             */
 
             app.Contacts.Create(contact);
-//            app.Auth.LogOut();
         }
 
-     }
+
+        [Test]
+        public void ContactCreationTestBottom()
+        {
+
+            ContactData contact = new ContactData("Петр", "Петров");
+
+            app.Contacts.Create(contact, 2);
+        }
+
+        [Test]
+        public void ContactCreationTestNext()
+        {
+            ContactData contact = new ContactData("Иван", "Иванов");
+            app.Contacts.Create(contact);
+            app.Contacts.AddNextContact();
+            contact.Lastname = "Романов";
+            contact.Firstname = "Роман";
+            app.Contacts.Create(contact);
+        }
+    }
 }
 
