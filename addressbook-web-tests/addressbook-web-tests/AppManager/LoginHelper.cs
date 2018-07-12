@@ -17,10 +17,9 @@ namespace WebAddressbookTests
         }
         public void Login(AccountData accountdata)
         {
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(accountdata.Username);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(accountdata.Password);
+            Type(By.Name("user"), accountdata.Username);
+            Type(By.Name("pass"), accountdata.Password);
+
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 

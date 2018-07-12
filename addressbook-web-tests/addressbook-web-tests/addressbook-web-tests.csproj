@@ -82,6 +82,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\GroupCreationTests.cs" />
     <Compile Include="Tests\ContactCreationTests.cs" />
+    <Compile Include="Tests\TestSuiteFixture.cs" />
+    <Compile Include="Tests\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

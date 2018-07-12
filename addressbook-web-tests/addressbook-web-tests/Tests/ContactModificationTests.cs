@@ -13,7 +13,7 @@ namespace WebAddressbookTests
         public void ContactModificationTestDetails()
         {
             ContactData contact = new ContactData("Сгей", "Сергеев");
-            contact.Address2 = "Санкт-Петербург";
+            contact.Address2 = null;
             contact.Bmonth = "May";
             contact.Amonth = "June";
 
