@@ -8,24 +8,24 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    public class ContactRemovalTests : TestBase
+    public class ContactRemovalTests : AuthTestBase
     {
         [Test]
         public void ContactRemovalTest()
         {
-            app.Contacts.Remove(1);
+            app.Contacts.Remove(2);
         }
 
         [Test]
         public void ContactRemovalTestDetails()
         {
-            app.Contacts.RemoveViaDetails(1);
+            app.Contacts.RemoveViaDetails(7);
         }
 
         [Test]
         public void ContactRemovalTestEdit()
         {
-            app.Contacts.RemoveViaEdit(1);
+            app.Contacts.RemoveViaEdit(9);
         }
     }
 }

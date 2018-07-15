@@ -21,7 +21,7 @@ namespace WebAddressbookTests
         public GroupHelper Create(GroupData group, int buttonIndex = 1)
         {
             manager.Navigator.GoToGroupsPage();
-            Thread.Sleep(1000);
+//            Thread.Sleep(1000);
             InitGroupCreation(buttonIndex);
             FillGroupForm(group);
             SubmitGroupCreation();
@@ -78,6 +78,17 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
+            if(! IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            {
+                while(! IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+                {
+                    GroupData group = new GroupData("aaa");
+                    group.Header = "ddd";
+                    group.Footer = "fff";
+                    Create(group);
+                }
+ 
+            }
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
