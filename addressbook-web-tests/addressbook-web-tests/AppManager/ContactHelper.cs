@@ -18,9 +18,7 @@ namespace WebAddressbookTests
         {
         }
 
-        private const string bySelected = "(//input[@name='selected[]'])";
-        private const string byDetails = "(//img[@alt='Details'])";
-        private const string byEdit = "(//img[@alt='Edit'])";
+
         public ContactHelper Create(ContactData contact, int buttonIndex = 1)
         {
             manager.Navigator.GoToHome();

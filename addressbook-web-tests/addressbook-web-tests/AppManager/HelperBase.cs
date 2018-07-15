@@ -9,6 +9,9 @@ namespace WebAddressbookTests
         protected IWebDriver driver;
         protected ApplicationManager manager;
         private bool acceptNextAlert = true;
+        public const string bySelected = "(//input[@name='selected[]'])";
+        public const string byDetails = "(//img[@alt='Details'])";
+        public const string byEdit = "(//img[@alt='Edit'])";
         public HelperBase(ApplicationManager manager)
         {
             this.manager = manager;

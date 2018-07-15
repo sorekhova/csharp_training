@@ -34,7 +34,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToGroupsPage();
 
-            SelectGroup(index);
+            SelectGroup(index, bySelected);
             InitGroupModification(buttonIndex);
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -46,7 +46,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToGroupsPage();
 
-            SelectGroup(index);
+            SelectGroup(index, bySelected);
             RemoveGroup(buttonIndex);
             ReturnToGroupsPage();
             return this;
@@ -76,11 +76,11 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper SelectGroup(int index)
+        public GroupHelper SelectGroup(int index, string type)
         {
-            if(! IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            if(! IsElementPresent(By.XPath(type + "[" + index + "]")))
             {
-                while(! IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+                while(! IsElementPresent(By.XPath(type + "[" + index + "]")))
                 {
                     GroupData group = new GroupData("aaa");
                     group.Header = "ddd";
@@ -89,7 +89,7 @@ namespace WebAddressbookTests
                 }
  
             }
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath(type + "[" + index + "]")).Click();
             return this;
         }
 
