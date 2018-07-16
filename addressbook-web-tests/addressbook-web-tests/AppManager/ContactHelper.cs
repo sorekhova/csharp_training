@@ -77,17 +77,14 @@ namespace WebAddressbookTests
         }
         public ContactHelper SelectContact(int index, string type)
         {
-            if (!IsElementPresent(By.XPath(type + "[" + index + "]")))
+            while (!IsElementPresent(By.XPath(type + "[" + index + "]")))
             {
-                while (!IsElementPresent(By.XPath(type + "[" + index + "]")))
-                {
-                    ContactData contact = new ContactData("Сергей", "Сергеев");
-                    Create(contact);
-                    manager.Navigator.GoToHome();
-                }
-
+                ContactData contact = new ContactData("Сергей", "Сергеев");
+                Create(contact);
+                manager.Navigator.GoToHome();
             }
-            driver.FindElement(By.XPath(type + "[" + index + "]")).Click();
+
+             driver.FindElement(By.XPath(type + "[" + index + "]")).Click();
             return this;
         }
 
