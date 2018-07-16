@@ -13,19 +13,25 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            app.Contacts.Remove(2);
+            int index = 4;
+            app.Contacts.IsContactPresent(index, app.Contacts.bySelected, null);
+            app.Contacts.Remove(index);
         }
 
         [Test]
         public void ContactRemovalTestDetails()
         {
-            app.Contacts.RemoveViaDetails(7);
+            int index = 7;
+            app.Contacts.IsContactPresent(index, app.Contacts.bySelected, null);
+            app.Contacts.RemoveViaDetails(index);
         }
 
         [Test]
         public void ContactRemovalTestEdit()
         {
-            app.Contacts.RemoveViaEdit(9);
+            int index = 9;
+            app.Contacts.IsContactPresent(index, app.Contacts.bySelected, null);
+            app.Contacts.RemoveViaEdit(index);
         }
     }
 }

@@ -15,13 +15,17 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            app.Groups.Remove(7);
+            int index = 7;
+            app.Groups.IsGroupPresent(index, app.Groups.bySelected, null);
+            app.Groups.Remove(index);
         }
 
         [Test]
         public void GroupRemovalTestBottom()
         {
-            app.Groups.Remove(2, 2);
+            int index = 2;
+            app.Groups.IsGroupPresent(index, app.Groups.bySelected, null);
+            app.Groups.Remove(index, 2);
         }
 
     }

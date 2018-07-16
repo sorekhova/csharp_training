@@ -9,9 +9,9 @@ namespace WebAddressbookTests
         protected IWebDriver driver;
         protected ApplicationManager manager;
         private bool acceptNextAlert = true;
-        public const string bySelected = "(//input[@name='selected[]'])";
-        public const string byDetails = "(//img[@alt='Details'])";
-        public const string byEdit = "(//img[@alt='Edit'])";
+        public string bySelected = "(//input[@name='selected[]'])";
+        public string byDetails = "(//img[@alt='Details'])";
+        public string byEdit = "(//img[@alt='Edit'])";
         public HelperBase(ApplicationManager manager)
         {
             this.manager = manager;
@@ -27,6 +27,15 @@ namespace WebAddressbookTests
             }
         }
 
+        public bool Value(By locator, string text)
+        {
+             return (driver.FindElement(locator).GetAttribute("value").ToString() == text);
+        }
+
+        public bool IsItemPresent(int index, string type)
+        {
+            return IsElementPresent(By.XPath(type + "[" + index + "]"));
+        }
         public bool IsElementPresent(By by)
         {
             try

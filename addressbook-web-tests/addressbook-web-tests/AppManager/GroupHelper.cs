@@ -78,16 +78,21 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index, string type)
         {
-            while(! IsElementPresent(By.XPath(type + "[" + index + "]")))
-            {
-                GroupData group = new GroupData("aaa");
-                group.Header = "ddd";
-                group.Footer = "fff";
-                Create(group);
-            }
  
             driver.FindElement(By.XPath(type + "[" + index + "]")).Click();
             return this;
+        }
+
+        public void IsGroupPresent(int index, string type, GroupData group)
+        {
+            if (group == null)
+            { group = new GroupData("new group"); }
+            manager.Navigator.GoToGroupsPage();
+            while (!IsItemPresent(index, type))
+            {
+                Create(group);
+            }
+            return;
         }
 
         public GroupHelper RemoveGroup(int index)

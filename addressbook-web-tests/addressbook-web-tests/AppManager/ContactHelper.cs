@@ -75,16 +75,25 @@ namespace WebAddressbookTests
             DeleteContact();
             return this;
         }
-        public ContactHelper SelectContact(int index, string type)
+
+
+
+        public void IsContactPresent(int index, string type, ContactData contact)
         {
-            while (!IsElementPresent(By.XPath(type + "[" + index + "]")))
+            if (contact == null)
+            { contact = new ContactData("Сергей", "Сергеев"); }
+            manager.Navigator.GoToHome();
+            while (!IsItemPresent(index, type))
             {
-                ContactData contact = new ContactData("Сергей", "Сергеев");
                 Create(contact);
                 manager.Navigator.GoToHome();
             }
+            return;
+        }
 
-             driver.FindElement(By.XPath(type + "[" + index + "]")).Click();
+         public ContactHelper SelectContact(int index, string type)
+        {
+            driver.FindElement(By.XPath(type + "[" + index + "]")).Click();
             return this;
         }
 
@@ -130,6 +139,12 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool IsContactValidValue(int index, string name, string value)
+        {
+            manager.Navigator.GoToHome();
+            SelectContact(index, byEdit);
+            return Value(By.Name(name), value);
+        }
         public ContactHelper FillEntry(ContactData contact, bool create = true)
         {
             Type(By.Name("firstname"), contact.Firstname);
