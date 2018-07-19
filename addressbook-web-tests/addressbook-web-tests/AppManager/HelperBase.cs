@@ -34,7 +34,7 @@ namespace WebAddressbookTests
 
         public bool IsItemPresent(int index, string type)
         {
-            return IsElementPresent(By.XPath(type + "[" + index + "]"));
+            return IsElementPresent(By.XPath(type + "[" + (index + 1) + "]"));
         }
         public bool IsElementPresent(By by)
         {

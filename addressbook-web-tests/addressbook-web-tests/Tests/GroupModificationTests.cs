@@ -13,14 +13,23 @@ namespace WebAddressbookTests.tests
         [Test]
         public void GroupModificationTest()
         {
-            int index = 5;
+            int index = 0;
             GroupData newData = new GroupData("zzz");
             newData.Header = null;
             newData.Footer = null;
             
             app.Groups.IsGroupPresent(index, app.Groups.bySelected, newData);
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Modify(index, newData);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            oldGroups[index].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -33,7 +42,16 @@ namespace WebAddressbookTests.tests
 
             app.Groups.IsGroupPresent(index, app.Groups.bySelected, newData);
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Modify(index, newData, 2);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            oldGroups[index].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

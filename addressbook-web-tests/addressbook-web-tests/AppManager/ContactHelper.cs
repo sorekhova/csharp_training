@@ -59,6 +59,26 @@ namespace WebAddressbookTests
             return this;
         }
 
+        internal List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHome();
+
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath(bySelected));
+            
+            foreach (IWebElement element in elements)
+            {
+                ContactData currentContact = new ContactData();
+                string title = element.GetAttribute("title");
+                string[] strSplit = title.Split(' ');
+                currentContact.Firstname = strSplit[1].Substring(1);
+                currentContact.Lastname = strSplit[2].Substring(0,strSplit[2].Length-1);
+                contacts.Add(currentContact);
+            };
+
+            return contacts;
+        }
+
         public ContactHelper RemoveViaDetails(int index)
         {
             manager.Navigator.GoToHome();
@@ -76,8 +96,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-
-
         public void IsContactPresent(int index, string type, ContactData contact)
         {
             if (contact == null)
@@ -93,7 +111,7 @@ namespace WebAddressbookTests
 
          public ContactHelper SelectContact(int index, string type)
         {
-            driver.FindElement(By.XPath(type + "[" + index + "]")).Click();
+            driver.FindElement(By.XPath(type + "[" + (index + 1) + "]")).Click();
             return this;
         }
 
