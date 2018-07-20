@@ -37,7 +37,10 @@ namespace WebAddressbookTests
 
         public void GoToHome()
         {
-            driver.FindElement(By.LinkText("home")).Click();
+            if (!IsElementPresent(By.Id("MassCB")))
+            {
+                driver.FindElement(By.LinkText("home")).Click();
+            }
         }
     }
 }

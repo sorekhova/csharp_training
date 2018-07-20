@@ -17,8 +17,35 @@ namespace WebAddressbookTests
             : base(manager)
         {
         }
+        private List<ContactData> contactCash = null;
 
+        public List<ContactData> GetContactList()
+        {
+            if (contactCash == null)
+            {
+                contactCash = new List<ContactData>();
+                manager.Navigator.GoToHome();
 
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath(bySelected));
+ 
+                foreach (IWebElement element in elements)
+                {
+                    string title = element.GetAttribute("title");
+                    
+                    string[] strSplit = title.Split(' ');
+                    contactCash.Add(new ContactData(strSplit[1].Substring(1), strSplit[2].Substring(0, strSplit[2].Length - 1))
+                    { Id = element.GetAttribute("value") });
+                };
+
+             };
+            return new List<ContactData>(contactCash);
+        }
+
+        public int GetContactCount()
+        {
+            manager.Navigator.GoToHome();
+            return driver.FindElements(By.XPath(bySelected)).Count;
+        }
         public ContactHelper Create(ContactData contact, int buttonIndex = 1)
         {
             manager.Navigator.GoToHome();
@@ -43,6 +70,7 @@ namespace WebAddressbookTests
         public ContactHelper ModifyViaDetails(int index, ContactData contact, int buttonIndex=1)
         {
             manager.Navigator.GoToHome();
+
             SelectContact(index, byDetails);
             ModifyContact();
             FillEntry(contact, false);
@@ -59,26 +87,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        internal List<ContactData> GetContactList()
-        {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHome();
-
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath(bySelected));
-            
-            foreach (IWebElement element in elements)
-            {
-                ContactData currentContact = new ContactData();
-                string title = element.GetAttribute("title");
-                string[] strSplit = title.Split(' ');
-                currentContact.Firstname = strSplit[1].Substring(1);
-                currentContact.Lastname = strSplit[2].Substring(0,strSplit[2].Length-1);
-                contacts.Add(currentContact);
-            };
-
-            return contacts;
-        }
-
+ 
         public ContactHelper RemoveViaDetails(int index)
         {
             manager.Navigator.GoToHome();
@@ -118,6 +127,7 @@ namespace WebAddressbookTests
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCash = null;
             return this;
         }
 
@@ -130,12 +140,14 @@ namespace WebAddressbookTests
         public ContactHelper UpdateContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[" + index + "]")).Click();
+            contactCash = null;
             return this;
         }
 
         public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[3]")).Click();
+            contactCash = null;
             return this;
         }
  
@@ -154,6 +166,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[" + index + "]")).Click();
+            contactCash = null;
             return this;
         }
 

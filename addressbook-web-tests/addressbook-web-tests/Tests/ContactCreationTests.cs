@@ -10,16 +10,11 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactCreationTests : AuthTestBase
     {
-        public int Compare(string x, string y)
-        {
-            throw new NotImplementedException();
-        }
-
+ 
         [Test]
         public void ContactCreationTest()
         {
-
-            
+       
             ContactData contact = new ContactData("Юрий", "Иванов");
             /*
             entry.Home = "+7(921)999-99-00";
@@ -46,6 +41,7 @@ namespace WebAddressbookTests
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Create(contact);
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
@@ -65,6 +61,7 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("Петр", "Петров");
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact, 2);
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
@@ -98,6 +95,7 @@ namespace WebAddressbookTests
 
             List<ContactData> nextOldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
+            Assert.AreEqual(nextOldContacts.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactData> nextNewContacts = app.Contacts.GetContactList();
             Assert.AreEqual(nextOldContacts.Count + 1, nextNewContacts.Count);

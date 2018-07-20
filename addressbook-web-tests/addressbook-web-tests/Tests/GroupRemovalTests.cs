@@ -20,8 +20,10 @@ namespace WebAddressbookTests
             app.Groups.IsGroupPresent(index, app.Groups.bySelected, null);
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[index];
 
             app.Groups.Remove(index);
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count - 1, newGroups.Count);
@@ -31,6 +33,11 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
         }
 
         [Test]
@@ -40,8 +47,10 @@ namespace WebAddressbookTests
             app.Groups.IsGroupPresent(index, app.Groups.bySelected, null);
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[index];
 
             app.Groups.Remove(index, 2);
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count - 1, newGroups.Count);
@@ -51,6 +60,11 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
         }
 
     }
