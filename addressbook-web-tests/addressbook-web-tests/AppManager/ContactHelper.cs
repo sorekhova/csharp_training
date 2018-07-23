@@ -25,16 +25,14 @@ namespace WebAddressbookTests
             {
                 contactCash = new List<ContactData>();
                 manager.Navigator.GoToHome();
+                
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
 
-                ICollection<IWebElement> elements = driver.FindElements(By.XPath(bySelected));
- 
                 foreach (IWebElement element in elements)
                 {
-                    string title = element.GetAttribute("title");
-                    
-                    string[] strSplit = title.Split(' ');
-                    contactCash.Add(new ContactData(strSplit[1].Substring(1), strSplit[2].Substring(0, strSplit[2].Length - 1))
-                    { Id = element.GetAttribute("value") });
+                    contactCash.Add(new ContactData(element.FindElements(By.TagName("td"))[2].Text, element.FindElements(By.TagName("td"))[1].Text)
+                    { Id = element.FindElements(By.TagName("td"))[0].FindElement(By.TagName("input")).GetAttribute("value") });
+
                 };
 
              };
