@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -14,6 +15,8 @@ namespace WebAddressbookTests
         private string aday = "-";
         private string amonth = "-";
         private string new_group = "[none]";
+        private string allphones;
+        private string allmails;
 
         public ContactData(string firstname="",  string lastname="")
         {
@@ -134,6 +137,55 @@ namespace WebAddressbookTests
         public override string ToString()
         {
             return "name = " + Firstname;
+        }
+
+        public string AllPhones
+        {
+            get
+            {
+                if (allphones != null)
+                {
+                    return allphones;
+                }
+                else
+                {
+                    return (Cleanup(Home)+Cleanup(Mobile)+Cleanup(Work)).Trim();
+                };
+                
+            }
+            set
+            {
+                allphones = value;
+            }
+        }
+
+        public string AllMails
+        {
+            get
+            {
+                if (allmails != null)
+                {
+                    return allmails;
+                }
+                else
+                {
+                    return (Email + Email2 + Email3).Trim();
+                };
+
+            }
+            set
+            {
+                allmails = value;
+            }
+        }
+
+        private string Cleanup(string phone)
+        {
+            if (phone == null || phone == "")
+            { return ""; }
+
+            return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
+       //     return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
         }
 
         public bool Equals(ContactData other)
