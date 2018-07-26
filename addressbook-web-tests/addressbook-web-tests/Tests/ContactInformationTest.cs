@@ -25,5 +25,18 @@ namespace WebAddressbookTests
 
         }
 
+        [Test]
+        public void TestViewContactInformation()
+        {
+            int index = 2;
+            ContactData fromView = app.Contacts.GetContactInformationFromViewForm(index);
+            ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(index);
+
+            //verification
+            Assert.AreEqual(fromView.AllViewNames, fromForm.AllViewNames);
+
+
+        }
+
     }
 }

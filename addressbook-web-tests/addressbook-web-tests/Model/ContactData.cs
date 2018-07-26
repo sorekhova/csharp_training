@@ -17,6 +17,7 @@ namespace WebAddressbookTests
         private string new_group = "[none]";
         private string allphones;
         private string allmails;
+        private string allviewnames;
 
         public ContactData(string firstname="",  string lastname="")
         {
@@ -149,7 +150,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (Cleanup(Home)+Cleanup(Mobile)+Cleanup(Work)).Trim();
+                    return (Cleanup(Home)+Cleanup(Mobile)+Cleanup(Work) + Cleanup(Phone2)).Trim();
                 };
                 
             }
@@ -179,6 +180,49 @@ namespace WebAddressbookTests
             }
         }
 
+        public string AllViewNames
+        {
+            get
+            {
+                if (allviewnames != null)
+                {
+                    return allviewnames;
+                }
+                else
+                {
+                    string homestr = "";
+
+                    homestr = (Homepage == "")? ("") : ("Homepage:" + Homepage.Replace("https://", ""));
+   
+                    string str = Firstname + Middlename + Lastname + Nickname + 
+                        Title + Company + Address + Home + Mobile + Work + Fax +
+                        Email + Email2 + Email3 +
+                        homestr + 
+                        FillDataField(Bday, Bmonth, Byear, "Birthday") +
+                        FillDataField(Aday, Amonth, Ayear, "Anniversary") +
+                        Address2 + Phone2 + Notes;
+  
+                    return str.Replace(" ","").ToUpper();
+                };
+
+            }
+            set
+            {
+                allviewnames = value;
+            }
+        }
+
+        private string FillDataField(string daystr, string monthstr, string yearstr, string str)
+        {
+           
+                daystr = daystr == "0" ? ("") : (daystr + ".");
+                monthstr = monthstr == "-" ? ("") : (monthstr);
+                yearstr = yearstr == "" ? ("") : (yearstr + "(" + Convert.ToString(DateTime.Today.Year - Int32.Parse(yearstr)) + ")");
+
+                return (daystr + monthstr + yearstr)==""? ("") : (str + daystr + monthstr + yearstr);
+           
+        }
+ 
         private string Cleanup(string phone)
         {
             if (phone == null || phone == "")

@@ -32,6 +32,11 @@ namespace WebAddressbookTests
              return (driver.FindElement(locator).GetAttribute("value").ToString() == text);
         }
 
+        public string Value(By locator)
+        {
+            return driver.FindElement(locator).GetAttribute("value").ToString() ;
+        }
+
         public bool IsItemPresent(int index, string type)
         {
             return IsElementPresent(By.XPath(type + "[" + (index + 1) + "]"));

@@ -29,9 +29,12 @@ namespace WebAddressbookTests
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
 
+            string middlename = Value(By.Name("middlename"));
+
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
 
 
             return new ContactData(firstName, lastName)
@@ -39,14 +42,51 @@ namespace WebAddressbookTests
                 Address = address,
                 Home = homePhone,
                 Mobile = mobilePhone,
+                Middlename = middlename,
+                Nickname = Value(By.Name("nickname")),
+                Title = Value(By.Name("title")),
+                Company = Value(By.Name("company")),
+                Fax = Value(By.Name("fax")),
+                Email = Value(By.Name("email")),
+                Email2 = Value(By.Name("email2")),
+                Email3 = Value(By.Name("email3")),
+                Bday = Value(By.Name("bday")),
+                Bmonth = Value(By.Name("bmonth")),
+                Byear = Value(By.Name("byear")),
+                Aday = Value(By.Name("aday")),
+                Amonth = Value(By.Name("amonth")),
+                Ayear = Value(By.Name("ayear")),
+                Address2 = Value(By.Name("address2")),
+                Notes = Value(By.Name("notes")),
+                Homepage = Value(By.Name("homepage")),
+                Phone2 = phone2,
                 Work = workPhone            
             };
         }
 
+        public ContactData GetContactInformationFromViewForm(int index)
+        {
+
+            manager.Navigator.GoToHomePage();
+            InitContactView(index);
+            string allViewNames = driver.FindElement(By.Id("content")).Text.Replace(" ","").Replace("\r\n","").Replace("H:","").Replace("M:","").Replace("W:","").Replace("F:","").Replace("P:","").ToUpper();
+ 
+            return new ContactData(null, null)
+            {
+                AllViewNames = allViewNames
+            };
+        }
         public void InitContactModification(int index)
         {
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
+        }
+
+        public void InitContactView(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
                 .FindElement(By.TagName("a")).Click();
         }
 
