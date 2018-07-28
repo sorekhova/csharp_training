@@ -195,12 +195,17 @@ namespace WebAddressbookTests
                     homestr = (Homepage == "")? ("") : ("Homepage:" + Homepage.Replace("https://", ""));
    
                     string str = Firstname + Middlename + Lastname + Nickname + 
-                        Title + Company + Address + Home + Mobile + Work + Fax +
+                        Title + Company + Address + 
+                        FillPhoneField(Home,"H:") +
+                        FillPhoneField(Mobile, "M:") +
+                        FillPhoneField(Work, "W:") +
+                        FillPhoneField(Fax, "F:") +
                         Email + Email2 + Email3 +
                         homestr + 
                         FillDataField(Bday, Bmonth, Byear, "Birthday") +
                         FillDataField(Aday, Amonth, Ayear, "Anniversary") +
-                        Address2 + Phone2 + Notes;
+                        Address2 +
+                        FillPhoneField(Phone2, "P:") + Notes;
   
                     return str.Replace(" ","").ToUpper();
                 };
@@ -222,7 +227,12 @@ namespace WebAddressbookTests
                 return (daystr + monthstr + yearstr)==""? ("") : (str + daystr + monthstr + yearstr);
            
         }
- 
+
+        private string FillPhoneField(string phone, string str)
+        {
+            return (phone) == "" ? ("") : (str + phone);
+        }
+
         private string Cleanup(string phone)
         {
             if (phone == null || phone == "")

@@ -69,7 +69,7 @@ namespace WebAddressbookTests
 
             manager.Navigator.GoToHomePage();
             InitContactView(index);
-            string allViewNames = driver.FindElement(By.Id("content")).Text.Replace(" ","").Replace("\r\n","").Replace("H:","").Replace("M:","").Replace("W:","").Replace("F:","").Replace("P:","").ToUpper();
+            string allViewNames = driver.FindElement(By.Id("content")).Text.Replace(" ","").Replace("\r\n","").ToUpper();
  
             return new ContactData(null, null)
             {
