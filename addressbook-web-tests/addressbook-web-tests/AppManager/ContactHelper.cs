@@ -295,9 +295,9 @@ namespace WebAddressbookTests
             Type(By.Name("homepage"), contact.Homepage);
             Type(By.Name("byear"), contact.Byear);
             Type(By.Name("ayear"), contact.Ayear);
-
+//            Thread.Sleep(5000);
             if (create) { new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday); };
-
+ //           Thread.Sleep(5000);
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
 
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(contact.Aday);
@@ -309,7 +309,7 @@ namespace WebAddressbookTests
             Type(By.Name("address2"), contact.Address2);
             Type(By.Name("phone2"), contact.Phone2);
             Type(By.Name("notes"), contact.Notes);
-
+            Thread.Sleep(5000);
             return this;
         }
 

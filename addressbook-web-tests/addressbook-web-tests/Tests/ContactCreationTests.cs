@@ -10,12 +10,44 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactCreationTests : AuthTestBase
     {
- 
-        [Test]
-        public void ContactCreationTest()
+        public static IEnumerable<ContactData> RandomContactDataProvider()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            for (int i = 0; i < 3; i++)
+            {
+                string[] monthes = { "-", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+                contacts.Add(new ContactData(GenerateRandomString(5), GenerateRandomString(5))
+                {
+                    Nickname = GenerateRandomString(3),
+                    Title = GenerateRandomString(8),
+                    Company = GenerateRandomString(10),
+                    Address = GenerateRandomString(25),
+                    Home = GenerateRandomInt(10),
+                    Mobile = GenerateRandomInt(10),
+                    Work = GenerateRandomInt(10),
+                    Email = GenerateRandomString(10),
+                    Email2 = GenerateRandomString(10),
+                    Email3 = GenerateRandomString(10),
+                    Bday = GenerateRandomDay(),
+                    Bmonth = monthes[Convert.ToInt32(GenerateRandomMonth())],
+                    Byear = GenerateRandomYear(),
+                    Middlename = GenerateRandomString(10),
+                    Aday = GenerateRandomDay(),
+                    Amonth = monthes[Convert.ToInt32(GenerateRandomMonth())],
+                    Ayear = GenerateRandomYear(),
+                    Address2 = GenerateRandomString(30),
+                    Phone2 = GenerateRandomInt(10),
+                    Notes = GenerateRandomString(30)
+
+                });
+            }
+            return contacts;
+        }
+        [Test, TestCaseSource("RandomContactDataProvider")]
+        public void ContactCreationTest(ContactData contact)
         {
        
-            ContactData contact = new ContactData("Юрий", "Иванов");
+            //ContactData contact = new ContactData("Юрий", "Иванов");
             /*
             entry.Home = "+7(921)999-99-00";
             entry.Address2 = "Санкт-Петербург";
