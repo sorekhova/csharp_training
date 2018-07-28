@@ -170,7 +170,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (Email + Email2 + Email3).Trim();
+                    return (PrepareEmail(Email) + PrepareEmail(Email2) + PrepareEmail(Email3)).Trim();
                 };
 
             }
@@ -230,6 +230,15 @@ namespace WebAddressbookTests
 
             return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
        //     return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+        }
+
+        private string PrepareEmail(string email)
+        {
+            if (email == null || email == "")
+            { return ""; }
+
+            return email + "\r\n";
+            //     return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
         }
 
         public bool Equals(ContactData other)
