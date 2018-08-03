@@ -19,11 +19,16 @@ namespace WebAddressbookTests
         private string allmails;
         private string allviewnames;
 
+        public ContactData()
+        {
+ 
+        }
         public ContactData(string firstname="",  string lastname="")
         {
             Firstname = firstname;
             Lastname = lastname;
         }
+
 
         public string Id { get; set; }
  
