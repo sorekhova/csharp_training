@@ -15,7 +15,8 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
+    //    public class GroupCreationTests : AuthTestBase
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
@@ -110,22 +111,24 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldGroups, newGroups);
         }
 
-        [Test, TestCaseSource("RandomGroupDataProvider")]
+        //       [Test, TestCaseSource("RandomGroupDataProvider")]
+        [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
-  
-//            GroupData group = new GroupData("aaa");
-//            group.Header = @"d\d""
-//d
-//d";
-//            group.Footer = "fff";
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            //            GroupData group = new GroupData("aaa");
+            //            group.Header = @"d\d""
+            //d
+            //d";
+            //            group.Footer = "fff";
 
+            //            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             app.Groups.Create(group);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            //List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             Assert.AreEqual(oldGroups.Count +1, newGroups.Count);
 
 
