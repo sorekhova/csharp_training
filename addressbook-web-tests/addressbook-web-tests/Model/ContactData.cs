@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using LinqToDB.Mapping;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-
+        
         private string bday = "-";
         private string bmonth = "-";
         private string aday = "-";
@@ -18,7 +20,7 @@ namespace WebAddressbookTests
         private string allphones;
         private string allmails;
         private string allviewnames;
-
+  
         public ContactData()
         {
  
@@ -29,14 +31,16 @@ namespace WebAddressbookTests
             Lastname = lastname;
         }
 
-
+        [Column(Name = "id"), PrimaryKey]
         public string Id { get; set; }
  
+        [Column(Name ="firstname")]
         public string Firstname { get; set; }
  
 
         public string Middlename { get; set; }
- 
+
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
   
         public string Nickname { get; set; }
@@ -222,6 +226,8 @@ namespace WebAddressbookTests
             }
         }
 
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
         private string FillDataField(string daystr, string monthstr, string yearstr, string str)
         {
            
@@ -279,6 +285,14 @@ namespace WebAddressbookTests
             if (Object.ReferenceEquals(other, null))
             { return 1; }
             return (Firstname+Lastname).CompareTo(other.Firstname+other.Lastname);
+        }
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated== "0000-00-00 00:00:00") select c).ToList();
+            }
         }
     }
 }

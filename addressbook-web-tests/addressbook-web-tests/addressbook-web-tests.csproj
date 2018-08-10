@@ -80,6 +80,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Model\AddressBookDB.cs" />
+    <Compile Include="Model\GroupContactRelation.cs" />
+    <Compile Include="Tests\AddingContactToGroupTests.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactInformationTest.cs" />
     <Compile Include="Tests\ContactModificationTests.cs" />
