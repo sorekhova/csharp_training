@@ -341,7 +341,7 @@ namespace WebAddressbookTests
             Type(By.Name("address2"), contact.Address2);
             Type(By.Name("phone2"), contact.Phone2);
             Type(By.Name("notes"), contact.Notes);
-            Thread.Sleep(5000);
+//            Thread.Sleep(5000);
             return this;
         }
 

@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : ContactTestBase
     {
         [Test]
         public void ContactRemovalTest()
@@ -16,13 +16,15 @@ namespace WebAddressbookTests
             int index = 2;
             app.Contacts.IsContactPresent(index, app.Contacts.bySelected, null);
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData toBeRemoved = oldContacts[index];
 
             app.Contacts.Remove(index);
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             Assert.AreEqual(oldContacts.Count-1, newContacts.Count);
 
             oldContacts.RemoveAt(index);
@@ -43,13 +45,15 @@ namespace WebAddressbookTests
             int index = 7;
             app.Contacts.IsContactPresent(index, app.Contacts.bySelected, null);
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData toBeRemoved = oldContacts[index];
 
             app.Contacts.RemoveViaDetails(index);
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             Assert.AreEqual(oldContacts.Count - 1, newContacts.Count);
 
             oldContacts.RemoveAt(index);
@@ -70,13 +74,15 @@ namespace WebAddressbookTests
             int index = 9;
             app.Contacts.IsContactPresent(index, app.Contacts.bySelected, null);
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData toBeRemoved = oldContacts[index];
 
             app.Contacts.RemoveViaEdit(index);
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             Assert.AreEqual(oldContacts.Count - 1, newContacts.Count);
 
             oldContacts.RemoveAt(index);

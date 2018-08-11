@@ -21,7 +21,7 @@ namespace WebAddressbookTests
 
             //List<GroupData> oldGroups = app.Groups.GetGroupList();
             List<GroupData> oldGroups = GroupData.GetAll();
-            
+
             GroupData toBeRemoved = oldGroups[index];
 
             //app.Groups.Remove(index);
@@ -50,13 +50,15 @@ namespace WebAddressbookTests
             int index = 2;
             app.Groups.IsGroupPresent(index, app.Groups.bySelected, null);
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            //List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData toBeRemoved = oldGroups[index];
 
             app.Groups.Remove(index, 2);
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            //List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             Assert.AreEqual(oldGroups.Count - 1, newGroups.Count);
 
             oldGroups.RemoveAt(index);

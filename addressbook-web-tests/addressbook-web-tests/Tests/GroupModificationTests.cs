@@ -20,13 +20,15 @@ namespace WebAddressbookTests.tests
             
             app.Groups.IsGroupPresent(index, app.Groups.bySelected, newData);
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            //List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[index];
 
             app.Groups.Modify(index, newData);
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            //List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
 
             oldGroups[index].Name = newData.Name;
             oldGroups.Sort();
@@ -52,12 +54,14 @@ namespace WebAddressbookTests.tests
 
             app.Groups.IsGroupPresent(index, app.Groups.bySelected, newData);
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            //List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[index];
             app.Groups.Modify(index, newData, 2);
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            //List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
 
             oldGroups[index].Name = newData.Name;
             oldGroups.Sort();

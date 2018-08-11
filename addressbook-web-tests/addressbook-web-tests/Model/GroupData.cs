@@ -63,7 +63,7 @@ namespace WebAddressbookTests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from g in db.Groups select g).ToList();
+                return (from g in db.Groups select g).OrderBy(x => x.Name).ToList();
             }
         }
 

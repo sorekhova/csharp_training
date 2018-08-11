@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactCreationTests : AuthTestBase
+    public class ContactCreationTests : ContactTestBase
     {
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
@@ -60,7 +60,7 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreationTest(ContactData contact)
         {
-       
+
             //ContactData contact = new ContactData("Юрий", "Иванов");
             /*
             entry.Home = "+7(921)999-99-00";
@@ -84,12 +84,14 @@ namespace WebAddressbookTests
             entry.Mobile = "+7";
             entry.Nickname = "iii";
             */
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             app.Contacts.Create(contact);
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
 
             oldContacts.Add(contact);
@@ -105,11 +107,13 @@ namespace WebAddressbookTests
         {
 
             ContactData contact = new ContactData("Петр", "Петров");
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             app.Contacts.Create(contact, 2);
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
 
             oldContacts.Add(contact);
@@ -123,11 +127,13 @@ namespace WebAddressbookTests
         public void ContactCreationTestNext()
         {
             ContactData contact = new ContactData("Иван", "Иванов");
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             app.Contacts.Create(contact);
 
             app.Contacts.AddNextContact();
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
 
             oldContacts.Add(contact);
@@ -139,11 +145,13 @@ namespace WebAddressbookTests
             contact.Lastname = "Романов";
             contact.Firstname = "Роман";
 
-            List<ContactData> nextOldContacts = app.Contacts.GetContactList();
+            //List<ContactData> nextOldContacts = app.Contacts.GetContactList();
+            List<ContactData> nextOldContacts = ContactData.GetAll();
             app.Contacts.Create(contact);
             Assert.AreEqual(nextOldContacts.Count + 1, app.Contacts.GetContactCount());
 
-            List<ContactData> nextNewContacts = app.Contacts.GetContactList();
+            //List<ContactData> nextNewContacts = app.Contacts.GetContactList();
+            List<ContactData> nextNewContacts = ContactData.GetAll();
             Assert.AreEqual(nextOldContacts.Count + 1, nextNewContacts.Count);
 
             nextOldContacts.Add(contact);

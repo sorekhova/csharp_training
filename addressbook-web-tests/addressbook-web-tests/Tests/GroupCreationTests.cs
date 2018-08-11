@@ -139,7 +139,8 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldGroups, newGroups);
         }
 
-        [Test, TestCaseSource("RandomGroupDataProvider")]
+        // [Test, TestCaseSource("RandomGroupDataProvider")]
+        [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTestBottom(GroupData group)
         {
 
@@ -147,12 +148,14 @@ namespace WebAddressbookTests
             //group.Header = "sss";
             //group.Footer = "sss";
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            //List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             app.Groups.Create(group, 2);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            //List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
 
             oldGroups.Add(group);

@@ -7,12 +7,12 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
         [Test]
         public void ContactModificationTestDetails()
         {
-            int index = 5;
+            int index = 1;
             //preparation
             ContactData contact = new ContactData("Сгей", "Сергеев");
             contact.Address2 = null;
@@ -21,7 +21,9 @@ namespace WebAddressbookTests
            
             app.Contacts.IsContactPresent(index, app.Contacts.byDetails, contact);
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+
             ContactData oldData = oldContacts[index];
 
             //action
@@ -31,7 +33,8 @@ namespace WebAddressbookTests
 
             //verification
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts[index].Firstname = contact.Firstname;
             oldContacts[index].Lastname = contact.Lastname;
@@ -56,19 +59,21 @@ namespace WebAddressbookTests
         {
             int index = 1;
             ContactData contact = new ContactData("Сергей", "Сергеев");
-            contact.Address2 = "Ьщсква";
-            contact.Bmonth = "May";
-            contact.Amonth = "June";
+            //contact.Address2 = "Ьщсква";
+            //contact.Bmonth = "May";
+            //contact.Amonth = "June";
 
             app.Contacts.IsContactPresent(index, app.Contacts.byDetails, contact);
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData oldData = oldContacts[index];
 
             app.Contacts.ModifyViaDetails(index, contact, 2);
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts[index].Firstname = contact.Firstname;
             oldContacts[index].Lastname = contact.Lastname;
@@ -93,14 +98,16 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("Сгей", "Сергеев");
             contact.Address2 = "Санкт-Петербург";
             app.Contacts.IsContactPresent(index, app.Contacts.byEdit, contact);
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData oldData = oldContacts[index];
 
             contact.Firstname = "Сергей";
             app.Contacts.ModifyViaEdit(index, contact);
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts[index].Firstname = contact.Firstname;
             oldContacts[index].Lastname = contact.Lastname;
@@ -126,13 +133,15 @@ namespace WebAddressbookTests
             contact.Address2 = "Владивосток";
             app.Contacts.IsContactPresent(index, app.Contacts.byEdit, contact);
             contact.Address2 = "Москва";
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData oldData = oldContacts[index];
 
             app.Contacts.ModifyViaEdit(index, contact, 2);
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts[index].Firstname = contact.Firstname;
             oldContacts[index].Lastname = contact.Lastname;
