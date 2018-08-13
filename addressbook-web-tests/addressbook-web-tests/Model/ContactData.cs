@@ -291,8 +291,41 @@ namespace WebAddressbookTests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from c in db.Contacts.Where(x => x.Deprecated== "0000-00-00 00:00:00") select c).OrderBy(x => x.Lastname).ToList();
+                return (from c in db.Contacts.Where(x => x.Deprecated== "0000-00-00 00:00:00") select c).OrderBy(x => x.Lastname + x.Firstname).ToList();
             }
+        }
+
+        public static ContactData GetLastContact()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                List<ContactData> contacts = (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+                return contacts.Last();
+            }
+        }
+
+        public List<GroupContactRelation> ContactEnteredToGroups(string contactId)
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+ 
+                return( (from gcr in db.GCR.Where(p => p.ContactId == contactId )
+                                 select gcr).Distinct().ToList());
+ 
+            }
+
+        }
+
+        public List<GroupContactRelation> ContactEnteredToGroup(string contactId, string groupId)
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+
+                return ((from gcr in db.GCR.Where(p => p.ContactId == contactId && p.GroupId == groupId)
+                         select gcr).Distinct().ToList());
+
+            }
+
         }
     }
 }

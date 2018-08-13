@@ -76,6 +76,22 @@ namespace WebAddressbookTests
                         select c).Distinct().ToList();
             }
         }
+
+        public bool ContactEnteredToGroup(string contactId, string groupId)
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                if((from c in db.Contacts
+                            from gcr in db.GCR.Where(p => p.GroupId == groupId && p.ContactId == contactId && c.Id == contactId && c.Deprecated == "0000-00-00 00:00:00")
+                            select c).Distinct().ToList().Count == 0)
+                {return false; }
+                else { return true; } 
+               
+            }
+            
+        }
+
+ 
     }
 
 
