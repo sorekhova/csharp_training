@@ -44,7 +44,7 @@ namespace WebAddressbookTests
             if (Object.ReferenceEquals(this, other))
             { return true; }
 
-            return Name == other.Name;
+            return Id == other.Id;
         }
 
         public override int GetHashCode()
@@ -56,8 +56,9 @@ namespace WebAddressbookTests
         {
             if (Object.ReferenceEquals(other, null))
             { return 1; }
-            return Name.CompareTo(other.Name);
+            return Id.CompareTo(other.Id);
         }
+
 
         public static List<GroupData> GetAll()
         {

@@ -287,6 +287,7 @@ namespace WebAddressbookTests
             return (Firstname+Lastname).CompareTo(other.Firstname+other.Lastname);
         }
 
+
         public static List<ContactData> GetAll()
         {
             using (AddressBookDB db = new AddressBookDB())
@@ -326,6 +327,16 @@ namespace WebAddressbookTests
 
             }
 
+        }
+
+        public static List<GroupData> GetGroups(string contactId)
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Groups
+                        from gcr in db.GCR.Where(p => p.ContactId == contactId && g.Id == p.GroupId )
+                        select g).Distinct().ToList();
+            }
         }
     }
 }

@@ -12,11 +12,55 @@ namespace WebAddressbookTests
         [Test]
         public void TestAddingContactToGroup()
         {
-            int contactIndex = 2;
-            int groupIndex = 8;
 
-            ContactData addContact = new ContactData("Юрий", "Сергеев");
-            app.Contacts.IsContactPresent(contactIndex, app.Contacts.bySelected, addContact);
+            List<ContactData> contacts = ContactData.GetAll().ToList();
+            if (contacts.Count == 0)
+            {
+                ContactData addContact = new ContactData("Юрий", "Сергеев");
+                app.Contacts.Create(addContact);
+            }
+            List<GroupData> groups = GroupData.GetAll().ToList();
+            if (groups.Count==0)
+            {
+                GroupData addGroup = new GroupData("my");
+                app.Groups.Create(addGroup);
+            }
+
+            contacts = ContactData.GetAll().ToList();
+            groups = GroupData.GetAll().ToList();
+
+            foreach (ContactData contact in contacts)
+            {
+                ContactData newContact = contact;
+                GroupData groupForAdding = groups.First();
+                List <GroupData> contactGroups = ContactData.GetGroups(contact.Id);
+                List<GroupData> contactNewGroups = GroupData.GetAll().Except(contactGroups).ToList();
+                if (contactNewGroups.Count == 0)
+                {
+                    // add new contact
+                    ContactData addContact = new ContactData("Мамай", "Сергеев");
+                    app.Contacts.Create(addContact);
+                    newContact = ContactData.GetLastContact();
+                }
+                else
+                {
+                    groupForAdding =  contactNewGroups.First();
+                }
+
+                List<ContactData> oldList = groupForAdding.GetContacts();
+                //actions
+                app.Contacts.AddContactsToGroup(newContact, groupForAdding);
+
+                //compare
+                List<ContactData> newList = groupForAdding.GetContacts();
+                oldList.Add(newContact);
+                oldList.Sort();
+                newList.Sort();
+
+                Assert.AreEqual(oldList, newList);
+
+            }
+/*
             ContactData contact = ContactData.GetAll()[contactIndex];
 
             GroupData addData = new GroupData("my");
@@ -45,7 +89,7 @@ namespace WebAddressbookTests
             newList.Sort();
 
             Assert.AreEqual(oldList, newList);
-
+*/
         }
 
         [Test]
