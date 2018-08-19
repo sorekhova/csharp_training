@@ -33,8 +33,10 @@ namespace addressbook_tests_white
             app.Groups.Remove(index-1);
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.RemoveAt(index-1);
             oldGroups.Sort();
+            oldGroups.RemoveAt(index-1);
+
+//            oldGroups.Sort();
             newGroups.Sort();
 
             Assert.AreEqual(oldGroups, newGroups);

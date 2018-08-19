@@ -38,10 +38,10 @@ namespace addressbook_tests_white
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             Assert.AreEqual(oldContacts.Count-1, newContacts.Count);
-
+            oldContacts.Sort();
             oldContacts.RemoveAt(index-1);
 
-            oldContacts.Sort();
+//            oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
 
