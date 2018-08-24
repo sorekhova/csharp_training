@@ -16,11 +16,6 @@ namespace mantis_tests
         protected IWebDriver driver;
         protected string baseURL;
 
-        protected LoginHelper loginHelper;
-        protected NavigationHelper navigator;
-        protected GroupHelper groupHelper;
-        protected ContactHelper contactHelper;
-
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
         private ApplicationManager()
@@ -31,12 +26,12 @@ namespace mantis_tests
 
             driver = new FirefoxDriver(options);
             baseURL = "http://localhost/";
+            Registration = new RegistrationHelper(this);
+            Ftp = new FtpHelper(this);
+
   //          verificationErrors = new StringBuilder();
 
-            loginHelper = new LoginHelper(this);
-            navigator = new NavigationHelper(this, baseURL);
-            groupHelper = new GroupHelper(this);
-            contactHelper = new ContactHelper(this);
+ 
         }
 
         ~ApplicationManager()
@@ -55,7 +50,8 @@ namespace mantis_tests
             if (! app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.Navigator.GoToHomePage();
+                newInstance.driver.Url = "http://localhost/mantisbt-2.16.0/mantisbt-2.16.0/login_page.php/";
+//                newInstance.driver.Url = "http://localhost/mantisbt-2.16.0/login_page.php";
                 app.Value = newInstance;
                 
             }
@@ -71,37 +67,7 @@ namespace mantis_tests
 
         }
 
-        public LoginHelper Auth
-        {
-            get
-            {
-                return loginHelper;
-            }
-        }
-
-        public NavigationHelper Navigator
-        {
-            get
-            {
-                return navigator;
-            }
-        }
-
-        public GroupHelper Groups
-        {
-            get
-            {
-                return groupHelper;
-            }
-        }
-
-        public ContactHelper Contacts
-        {
-            get
-            {
-                return contactHelper;
-            }
-        }
-
+        public RegistrationHelper Registration { get; private set; }
+        public FtpHelper Ftp { get;  set; }
     }
 }
