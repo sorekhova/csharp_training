@@ -25,7 +25,7 @@ namespace mantis_tests
             options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
 
             driver = new FirefoxDriver(options);
-            baseURL = "http://localhost/";
+            baseURL = "http://localhost";
             Registration = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
 
@@ -50,8 +50,8 @@ namespace mantis_tests
             if (! app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-2.16.0/mantisbt-2.16.0/login_page.php/";
-//                newInstance.driver.Url = "http://localhost/mantisbt-2.16.0/login_page.php";
+  //              newInstance.driver.Url = "http://localhost/mantisbt-2.16.0/mantisbt-2.16.0/login_page.php/";
+                newInstance.driver.Url = "http://localhost/mantisbt-1.2.20/login_page.php";
                 app.Value = newInstance;
                 
             }
