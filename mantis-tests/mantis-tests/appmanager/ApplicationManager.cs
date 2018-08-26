@@ -27,7 +27,12 @@ namespace mantis_tests
             driver = new FirefoxDriver(options);
             baseURL = "http://localhost";
             Registration = new RegistrationHelper(this);
+            Login = new LoginHelper(this);
             Ftp = new FtpHelper(this);
+            James = new JamesHelper(this);
+            Mail = new MailHelper(this);
+            Menu = new ManagementMenuHelper(this);
+            Project = new ProjectManagementHelper(this);
 
   //          verificationErrors = new StringBuilder();
 
@@ -67,7 +72,13 @@ namespace mantis_tests
 
         }
 
-        public RegistrationHelper Registration { get; private set; }
+        public RegistrationHelper Registration { get; set; }
         public FtpHelper Ftp { get;  set; }
+        public JamesHelper James { get; set; }
+        public MailHelper Mail { get;  set; }
+
+        public LoginHelper Login { get;  set; }
+        public ManagementMenuHelper Menu { get;  set; }
+        public ProjectManagementHelper Project { get;  set; }
     }
 }
