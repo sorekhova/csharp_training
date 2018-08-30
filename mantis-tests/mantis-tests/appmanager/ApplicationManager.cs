@@ -25,7 +25,7 @@ namespace mantis_tests
             options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
 
             driver = new FirefoxDriver(options);
-            baseURL = "http://localhost";
+            baseURL = "http://localhost/mantisbt-1.2.20";
             Registration = new RegistrationHelper(this);
             Login = new LoginHelper(this);
             Ftp = new FtpHelper(this);
@@ -33,6 +33,7 @@ namespace mantis_tests
             Mail = new MailHelper(this);
             Menu = new ManagementMenuHelper(this);
             Project = new ProjectManagementHelper(this);
+            Admin = new AdminHelper(this, baseURL);
 
   //          verificationErrors = new StringBuilder();
 
@@ -56,7 +57,7 @@ namespace mantis_tests
             {
                 ApplicationManager newInstance = new ApplicationManager();
   //              newInstance.driver.Url = "http://localhost/mantisbt-2.16.0/mantisbt-2.16.0/login_page.php/";
-                newInstance.driver.Url = "http://localhost/mantisbt-1.2.20/login_page.php";
+                newInstance.driver.Url = newInstance.baseURL + "/login_page.php";
                 app.Value = newInstance;
                 
             }
@@ -80,5 +81,6 @@ namespace mantis_tests
         public LoginHelper Login { get;  set; }
         public ManagementMenuHelper Menu { get;  set; }
         public ProjectManagementHelper Project { get;  set; }
+        public AdminHelper Admin { get;  set; }
     }
 }
