@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace mantis_tests
 {
-    public class ProjectData
+    public class IssueData
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Status { get; set; }
-        public string ViewStatus { get; set; }
+        public string Summary { get; set; }
 
         public string Description { get; set; }
-
+        public string Category { get; set; }
     }
 }
-

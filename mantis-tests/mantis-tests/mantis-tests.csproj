@@ -65,7 +65,9 @@
       <HintPath>..\packages\System.Net.FtpClient.1.0.5824.34026\lib\net40\System.Net.FtpClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebDriver, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -88,6 +90,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="appmanager\APIHelper.cs" />
     <Compile Include="appmanager\AdminHelper.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />
     <Compile Include="appmanager\LoginHelper.cs" />
@@ -100,21 +103,81 @@
     <Compile Include="appmanager\RegistrationHelper.cs" />
     <Compile Include="appmanager\TelnetInterface.cs" />
     <Compile Include="model\AccountData.cs" />
+    <Compile Include="model\IssueData.cs" />
     <Compile Include="model\ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Mantis\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="tests\AccountCreationTests.cs" />
+    <Compile Include="tests\AddNewIssue.cs" />
     <Compile Include="tests\ProjectCreation.cs" />
     <Compile Include="tests\RemoveProject.cs" />
     <Compile Include="tests\TestBase.cs" />
     <Compile Include="tests\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Service References\Mantis\mantisconnect.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config_inc.php">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.AccountData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.CustomFieldDefinitionData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.FilterData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.HistoryData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.IssueData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.IssueHeaderData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.ObjectRef.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.ProfileDataSearchResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.ProjectAttachmentData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.ProjectData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.ProjectVersionData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.TagDataSearchResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\mantis_tests.Mantis.UserData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Mantis\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Mantis\configuration.svcinfo" />
+    <None Include="Service References\Mantis\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Mantis\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
