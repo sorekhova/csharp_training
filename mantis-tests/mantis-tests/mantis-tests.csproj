@@ -46,11 +46,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\RazorHosting.dll</HintPath>
+      <HintPath>..\packages\SimpleBrowser.0.5.79.0\lib\net40\RazorHosting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleBrowser, Version=0.5.61.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\SimpleBrowser.dll</HintPath>
+    <Reference Include="SimpleBrowser, Version=0.5.79.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.79.0\lib\net40\SimpleBrowser.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleBrowser.WebDriver, Version=0.5.37.0, Culture=neutral, processorArchitecture=MSIL">
@@ -68,8 +68,8 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebDriver, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.14.0\lib\net45\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.4.0\lib\net40\WebDriver.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
