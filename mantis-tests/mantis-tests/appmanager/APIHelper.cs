@@ -25,5 +25,66 @@ namespace mantis_tests
             issue.project.id = project.Id;
             client.mc_issue_add(account.Name, account.Password, issue);
         }
+
+        public void CreateNewProject(AccountData account, ProjectData project)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData projectData = new Mantis.ProjectData();
+            projectData.description = project.Description;
+            projectData.name = project.Name;
+            projectData.status = new Mantis.ObjectRef();
+            projectData.status.name = project.Status;
+            Mantis.ProjectData[] table = client.mc_projects_get_user_accessible(account.Name, account.Password);
+            if (table.Count() != 0)
+            {
+                foreach(Mantis.ProjectData projectD in table)
+                {
+                    if (projectD.name==project.Name)
+                    {
+                        client.mc_project_delete(account.Name, account.Password,projectD.id);
+                    }
+                }
+            };
+
+
+            client.mc_project_add(account.Name, account.Password,projectData);
+
+          }
+
+        public void RemoveProject(AccountData account, ProjectData project)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData projectData = new Mantis.ProjectData();
+            projectData.description = project.Description;
+            projectData.name = project.Name;
+            projectData.status = new Mantis.ObjectRef();
+            projectData.status.name = project.Status;
+            bool found = false;
+            Mantis.ProjectData[] table = client.mc_projects_get_user_accessible(account.Name, account.Password);
+            if (table.Count() != 0)
+            {
+                foreach (Mantis.ProjectData projectD in table)
+                {
+                    if (projectD.name == project.Name)
+                    {
+                        found = true;
+                        client.mc_project_delete(account.Name, account.Password, projectD.id);
+                    }
+                }
+            }
+            if (!found)
+            {
+                Mantis.ProjectData[] newTable = client.mc_projects_get_user_accessible(account.Name, account.Password);
+                foreach (Mantis.ProjectData projectD in newTable)
+                {
+                    if (projectD.name == project.Name)
+                    {
+                        client.mc_project_delete(account.Name, account.Password, projectD.id);
+                    }
+                }
+            }
+    
+
+        }
     }
 }

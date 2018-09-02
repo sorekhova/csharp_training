@@ -112,6 +112,8 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="tests\AccountCreationTests.cs" />
+    <Compile Include="tests\DeleteProject.cs" />
+    <Compile Include="tests\AddNewProject.cs" />
     <Compile Include="tests\AddNewIssue.cs" />
     <Compile Include="tests\ProjectCreation.cs" />
     <Compile Include="tests\RemoveProject.cs" />
