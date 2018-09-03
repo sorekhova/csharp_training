@@ -21,7 +21,7 @@ namespace mantis_tests
  
             ProjectData project = new ProjectData()
             {
-                Name = "3",
+                Name = "first",
                 Status = "stable",
                 Description = "my"
             };
